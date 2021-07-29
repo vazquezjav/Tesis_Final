@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+</head>
+
+<body>
+    
+    <p-toast [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
+    <p-dialog header="Bienvenido 😀" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+        [draggable]="false" [resizable]="false">
+        <p class="p-m-0">Al parecer es un usuario nuevo, le damos la bienvenida a nuestra herramienta y esperemos que su experiencia sea la mejor 😎 </p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+
+    <p-card *ngIf="data['rol']=='user'">
+        <div class="p-field p-col-12 p-md-4">
+            <label for="minmax-buttons">Url Facebook &nbsp; &nbsp; &nbsp;</label>
+            <span class="p-float-label p-input-icon-right">
+                <input type="text" id="inputtext-right" pInputText [(ngModel)]="url" style="width: 250%;">
+                <label for="inputtext-right">Url &nbsp; <i class="pi pi-facebook"></i></label>
+                <small class="p-error" *ngIf="enviado && !url"> &nbsp;* Campo requerido</small>
+            </span>
+        </div>
+        
+        <br>
+        <div class="p-field p-col-12 p-md-3">
+            <label for="minmax-buttons">Numero Topicos </label>
+            <p-inputNumber [(ngModel)]="numero_topics" mode="decimal" [showButtons]="true" inputId="minmax-buttons"
+                [min]="2" [max]="12"></p-inputNumber>
+                <small class="p-error" *ngIf="enviado && !numero_topics"> &nbsp;* Campo requerido</small>
+        </div>
+        <br>
+        <div>
+            <!--<button pButton type="button" class="p-button-raised p-button-rounded" (click)='analizar()'>Analizar</button>-->
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+            </p-confirmDialog>
+            <p-button (click)="analizar()" icon="pi pi-check" label="Analizar"
+                styleClass="p-mr-2 p-button-raised p-button-rounded"></p-button>
+
+        </div>
+    </p-card>
+
+    <br>
+
+    <p-table #publi [value]='publicaciones' [rows]="10" [paginator]="true" [globalFilterFields]="['nombre_publicacion']"
+        [rowHover]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"   [scrollable]="true" scrollHeight="650px"
+        [virtualRowHeight]="34" [style]="{height: '50vw'}"
+        >
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Ultimas Publicaciones
+                <!--<span class="p-input-icon-left spaceSearch inputSearch">
+                            
+                    <p-columnFilter type="text" field="nombre_publicacion"  placeholder="🔍 Buscar Comentarios" mode="contains" ></p-columnFilter>
+                </span> -->
+
+                <span class="p-input-icon-left p-ml-auto spaceSearch inputSearch">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text"  (input)="publi.filterGlobal($event.target.value, 'contains')" placeholder="Buscar publicacion" class="sizeSearch" />
+                </span>
+
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="nombre_publicacion">Nombre <p-sortIcon field="nombre_publicacion"></p-sortIcon></th>
+                <th >Imagen </th>
+                <th pSortableColumn="reacciones">Reacciones <p-sortIcon field="reacciones"></p-sortIcon></th>
+                <th pSortableColumn="num_comentarios">Comentario <p-sortIcon field="num_comentarios"></p-sortIcon></th>
+                <th pSortableColumn="rating">Calidad<p-sortIcon field="rating"></p-sortIcon></th>
+                <th></th>
+            </tr>
+            
+        </ng-template>
+        <ng-template pTemplate="body" let-publicacion>
+            <tr [pSelectableRow]="publicacion">
+                <!--<td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td> -->
+                <td (click)="resultadoPublicacion(publicacion)">{{publicacion.nombre_publicacion}}</td>
+                <td (click)="resultadoPublicacion(publicacion)"><img src="{{publicacion.imagen_publicacion}}"
+                        [alt]="publicacion.nombre_publicacion" width="100" class="p-shadow-4" /></td>
+                <td (click)="resultadoPublicacion(publicacion)">{{publicacion.reacciones}}</td>
+                <td (click)="resultadoPublicacion(publicacion)">{{publicacion.num_comentarios}}</td>
+                <td style="text-align:center">
+                    <p-rating [ngModel]="publicacion.rating" [readonly]="true" [cancel]="false"
+                        (click)="resultadoPublicacion(publicacion)"></p-rating>
+                </td>
+                <td>
+                    <!--<button type="button" (click)="vistaRapida()" pButton icon="pi pi-info-circle" label="Show"></button>
+                        <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-success p-mr-2" (click)="resultadoPublicacion(publicacion)"></button>-->
+
+                    <button pButton pRipple type="button" label="Vista rapida" icon="pi pi-search"
+                        (click)="op.toggle($event); vistaRapida(publicacion.id_publicacion)"
+                        class="p-button-rounded p-button-outlined"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="6">No cuenta con publicaciones analizadas</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ngx-spinner
+    size = "large"
+    color="#FFC300"
+    type="pacman"
+    ></ngx-spinner>
+
+    <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+            <p-table [value]="comentarios" [paginator]="true" [rows]="3" [responsive]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Comentario</th>
+                        <th>Sentimiento</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-comentario>
+                    <tr>
+                        <td>{{comentario.detalle_comentario}}</td>
+                        <td>{{comentario.sentimiento}}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel>
+<br>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<html>
+    <head></head>
+    <body>
+        <div class="card">
+            <h1 style="text-align: center;"> Equipo de trabajo</h1>
+            <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">
+                <ng-template pTemplate="marker" let-event>
+                    
+                </ng-template>
+                <ng-template pTemplate="content" let-event>
+                    <p-card [header]="event.rol" [subheader]="event.name">
+                        <img *ngIf="event.image" [src]="'assets/' + event.image" [alt]="event.name" width="200" class="p-shadow-2" style=" border-radius: 50%;"/>
+                        <p> {{event.detail}} <br> <br>
+                            <a [href]="event.facebook" *ngIf="event.facebook"><i class="pi pi-facebook colorFont"></i></a> &nbsp;
+                            <a [href]="event.github" *ngIf="event.github"><i class="pi pi-github colorFont"></i></a> &nbsp;
+                            <a [href]="event.twitter" *ngIf="event.twitter"><i class="pi pi-twitter colorFont"></i></a>  &nbsp;
+                            <a [href]="event.google" *ngIf="event.google"><i class="pi pi-google colorFont"></i></a>
+                        </p>
+                        <button pButton  class="p-button-text" *ngIf="event.page"  ><a [href]='event.page'>Leer mas</a></button>
+                    </p-card>
+                </ng-template>
+            </p-timeline>
+        </div>
+    </body>
+</html>

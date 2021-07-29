@@ -1,0 +1,12 @@
+{
+    "/user/*":{
+        "target":"https://cloudcomputing.ups.edu.ec/api-node-siast",
+        "secure":true,
+        "logLevel":"debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/user": "/user"
+          }
+          
+    }
+} 

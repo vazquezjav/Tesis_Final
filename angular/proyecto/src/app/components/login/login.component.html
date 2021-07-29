@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Login</title>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    </head>
+    <body>
+        <div class="Centered">
+            <p-card header="Login" [style]="{width: '500px'}" styleClass="p-card-shadow">
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="assets/logoLogin.png">
+                </ng-template>
+                <div class="p-grid p-fluid">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <input type="email" pInputText [(ngModel)]="user.email" placeholder="Correo" />        
+                    </div>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>        
+                        <p-password  [toggleMask]="true" id="password"  pInputText [(ngModel)]="user.password" placeholder="Contraseña" [feedback]="false" ></p-password>
+                    </div>
+                    
+                </div>
+                <ng-template pTemplate="footer">
+                   <!-- <p-button label="Save" icon="pi pi-check"></p-button>
+                    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button> -->
+                    <div class="centerButtons">
+                        <button pButton type="button" class="p-button-rounded p-button-help spaceButton" (click)='registro()' label="Registrarse" ></button>
+                        <button pButton type="button" class="p-button-raised p-button-rounded p-d-block p-mx-auto spaceButton extendButton" (click)='login()' label="Login" ></button>
+                    </div>
+                    
+                    
+                </ng-template>
+            </p-card>
+        </div>
+        
+        <p-toast></p-toast>
+    </body>
+</html>
+ 

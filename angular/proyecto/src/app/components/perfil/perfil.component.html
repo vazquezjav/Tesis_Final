@@ -1,0 +1,57 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <p-card header="Perfil Usuario" subheader="Datos Personales" [style]="{width: '560px'}" styleClass="p-card-shadow"
+        class="Centered">
+        <ng-template pTemplate="header">
+            <img alt="Card" src="https://electronicssoftware.net/wp-content/uploads/user.png" class="imagen center">
+        </ng-template>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-6">
+                <label for="name">Nombre</label>
+                <input id="name" type="text" pInputText [(ngModel)]="usuario.nombre_usuario" required autofocus>
+                <small class="p-error" *ngIf="enviado && !usuario.nombre_usuario">Nombre requerido</small>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="address">Direccion </label>
+                <input id="address" type="text" pInputText [(ngModel)]="usuario.direccion_usuario">
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="email">Correo</label>
+                <input id="email" type="text" pInputText [(ngModel)]="usuario.email">
+                <small class="p-error" *ngIf="enviado && !usuario.email">Correo requerido</small>
+                <br>
+                <label for="email">Contraseña</label>
+            </div>
+
+            <div class="p-inputgroup">
+
+                <p-password [toggleMask]="true" id="password" pInputText [(ngModel)]="usuario.password"
+                    placeholder="Password" [feedback]="true"></p-password>
+
+            </div>
+            <small class="p-error" *ngIf="enviado && !usuario.password">Contraseña requerido</small>
+
+        </div>
+        <ng-template pTemplate="footer">
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+            </p-confirmDialog>
+            <p-toast></p-toast>
+            <div class="centerButton">
+                <button pButton type="button" label="Guadar" class="p-button-outlined p-button-rounded"
+                    (click)="guardar()"></button>
+                <button pButton pRipple type="button" label="Cancelar"
+                    class="p-button-outlined p-button-danger p-button-rounded" [style]="{'margin-left': '.5em'}"
+                    (click)="cancelar()"></button>
+            </div>
+
+        </ng-template>
+
+    </p-card>
+</body>
+
+</html>

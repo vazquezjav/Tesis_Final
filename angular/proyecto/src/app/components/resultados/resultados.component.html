@@ -1,0 +1,129 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <p-toast></p-toast>
+    <!--<div>
+            <img [src]="publicacion.path_ldatopics"  id="imagen">  
+        </div>  -->
+
+    <p-table #coments [value]='comentariosResultados' [columns]="cols" [scrollable]="true" scrollHeight="650px"
+        [virtualRowHeight]="34" [style]="{height: '50vw'}"  [globalFilterFields]="['comentario']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+
+                <div>
+                    <label>Exportar </label>
+                    <button type="button" pButton pRipple icon="pi pi-file-o" (click)="coments.exportCSV()"
+                        class="p-mr-2" pTooltip="CSV" tooltipPosition="bottom" style="margin-right: 0.5em;"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                        class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom"
+                        style="margin-right: 0.5em;"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportpdf()"
+                        class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+
+                        <!--<span class="p-input-icon-left spaceSearch inputSearch">
+                            <p-columnFilter type="text" field="comentario"  placeholder="🔍 Buscar Comentarios" ></p-columnFilter>
+                        </span> --->
+                        <span class="p-input-icon-left p-ml-auto spaceSearch inputSearch">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"  (input)="coments.filterGlobal($event.target.value, 'contains')" placeholder="Buscar comentario" class="sizeSearch" />
+                        </span>
+                </div>
+                
+
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="comentario">Comentario <p-sortIcon field="comentario"></p-sortIcon>
+                </th>
+                <th pSortableColumn="sentimiento">Sentimiento <p-sortIcon field="sentimiento"></p-sortIcon>
+                </th>
+                <th pSortableColumn="topico">Topico <p-sortIcon field="topico"></p-sortIcon>
+                </th>
+                
+                <!--<th *ngFor="let col of columns" [pSortableColumn]="col.header">
+                   {{col.header}}
+               </th>-->
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-comentario>
+            <tr>
+                <!-- <td *ngFor="let col of columns">
+                   {{comentario[col.field]}}
+               </td>-->
+                <td>{{comentario.comentario}}</td>
+                <td>{{comentario.sentimiento}}</td>
+                <td>{{comentario.topico}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="2">No cuenta con comentarios la publicacion</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <h2>PORCENTAJE </h2>
+    <div class="content-section implementation">
+        <div  class="card">
+            <canvas  id="canvaPorcentajeComentarios" style="display: block; height: 105px; width: 305px;"> </canvas>
+        </div>
+    </div>
+    <br>
+    <div class="polaroid image">
+        <img [src]="publicacion.path_ldatopics" alt="5 Terre" style="width:90%">
+        <div class="container">
+            <h2>Distribucion Palabras Topico</h2>
+        </div>
+    </div>
+    <div class="polaroid center centerPyldavis">
+        <h2>Relacion topicos</h2>
+        <iframe [src]="iframe" height="900" width="1300" title="description" id="iframe"></iframe>
+    </div>
+
+    <div class="polaroid2">
+        <h2>Distribucion Comentarios</h2>
+        <iframe [src]="iframe_iterativo" height="620" width="1015" title="description" id="iframe_iterativo"></iframe>
+    </div>
+    <br>
+    <!--<div class="content-section implementation">
+        <div class="card">
+            <p-chart type="doughnut" [data]="data" width="750" height="550"></p-chart>
+        </div>
+    </div> -->
+
+    <div class="card">
+
+        <p-splitter [style]="{'height': '550px'}" styleClass="p-mb-5">
+            <ng-template pTemplate>
+                <div class="p-col p-d-flex p-ai-center p-jc-center">
+                    <h2 class="centerTextCanva">Reacciones </h2>
+                    <div>
+                        <canvas #canva id="canva" width="700" height="450"> </canvas>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate>
+                <div class="p-col p-d-flex p-ai-center p-jc-center">
+                    <h2 class="centerTextCanva">Comentarios - Topicos </h2>
+                    <div>
+                        <canvas #canvaTopico id="canvaTopico" width="700" height="450"> </canvas>
+                    </div>
+                </div>
+            </ng-template>
+        </p-splitter>
+        
+    </div>
+    <br><br><br>
+    <!--<div>
+
+        <label>Calificanos</label>
+        <p-rating [(ngModel)]="publicacion.rating" [cancel]="false" (click)="cambios()"></p-rating>
+    </div>-->
+</body>
+
+</html>

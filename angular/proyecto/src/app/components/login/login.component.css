@@ -1,0 +1,22 @@
+body .wrapper .main {
+    padding: 35px 16px 16px 3px; 
+}
+.Centered {
+	position: static;
+	/*top: 50%;
+	left: 50%;*/
+	transform: translate(-50%, -50%);
+	width: 500px;
+	margin-left: 50%;
+	margin-top: 24%;;
+}
+.centerButtons{
+	margin-left: 95px;
+}
+.spaceButton{
+	margin:5px;
+}
+.extendButton{
+	width: 200px;
+	align-items: center;
+}

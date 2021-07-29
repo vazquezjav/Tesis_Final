@@ -1,0 +1,30 @@
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+   
+    <div class="card">
+        
+        <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">
+            <ng-template pTemplate="marker" let-event>
+                <span class="custom-marker p-shadow-2" [style.backgroundColor]="event.color">
+                    <i [ngClass]="event.icon"></i>
+                </span>
+            </ng-template>
+            <ng-template pTemplate="content" let-event>
+                <p-card [header]="event.status" >
+                    <img *ngIf="event.image" [src]="'assets/showcase/images/demo/product/' + event.image" [alt]="event.name" width="200" class="p-shadow-2" />
+                    <p>{{event.field}}</p>
+                    <button pButton  class="p-button-text" *ngIf="event.url"  ><a [href]='event.url'>Saber mas</a></button>
+                </p-card>
+            </ng-template>
+        </p-timeline>
+    </div>
+    
+</body>
+
+</html>

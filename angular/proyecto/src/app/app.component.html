@@ -1,0 +1,23 @@
+
+
+<p-menubar [model]="items" >
+    <ng-template pTemplate="start">
+        <img src="assets/logo_transparent.png" height="60" class="p-mr-2">
+    </ng-template>
+    <ng-template pTemplate="end" >
+        <!--<button pButton label="Login" icon="pi pi-sign-in" (click)="iniciarSesion()" *ngIf="!login"></button>
+        <p-avatar image="https://electronicssoftware.net/wp-content/uploads/user.png" styleClass="p-mr-2" size="large" shape="circle" *ngIf="login"></p-avatar>
+        <button pButton label="LogOut" icon="pi pi-power-off" (click)="cerrarSesion()" *ngIf="login"></button>
+        -->
+        
+        <p-chip [label]="nombreUsuario" image="https://electronicssoftware.net/wp-content/uploads/user.png" styleClass="p-mr-2" *ngIf="login"></p-chip>
+        
+    </ng-template>
+</p-menubar>
+
+
+<div class="p container mt-5">
+    <router-outlet></router-outlet>
+
+</div>
+<app-footer class="mt-auto"></app-footer>

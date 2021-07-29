@@ -1,0 +1,101 @@
+
+<html>
+    <head> 
+
+    </head>
+
+    <body>
+        
+        <p-toast></p-toast>
+         <p-table #usu [value]="usuarios" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre_usuario']"  styleClass="p-datatable-customers p-datatable-gridlines"
+         [rowHover]="false" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" pageLinkSize="3" id="tabla">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    
+                    <label>Usuarios&nbsp;  </label>    
+                    <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="agregarUsuario()"></button>
+                    <span class="p-input-icon-left spaceSearch inputSearch">
+                        
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"  (input)="usu.filterGlobal($event.target.value, 'contains')" placeholder="Buscar usuario " class="sizeSearch" />
+                    </span>
+    
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="nombre_usuario">Nombre <p-sortIcon field="nombre_usuario"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="direccion_usuario">Direccion <p-sortIcon field="direccion_usuario"></p-sortIcon></th>
+                    <th pSortableColumn="email">Correo <p-sortIcon field="email"></p-sortIcon></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-usuario>
+                <tr [pSelectableRow]="usuario"  [ngClass]="{'inhabilitado': usuario.estado === 'Inhabilitado'}">
+                    <!--<td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td> -->
+                    <td  ><p-avatar image="https://electronicssoftware.net/wp-content/uploads/user.png" styleClass="p-mr-2" size="large" shape="circle"></p-avatar> {{usuario.nombre_usuario}}</td>
+                    <td  >{{usuario.direccion_usuario}}</td>
+                    <td  >{{usuario.email}}</td>
+
+                    <td>
+                        <!--<button type="button" (click)="vistaRapida()" pButton icon="pi pi-info-circle" label="Show"></button>
+                        <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-success p-mr-2" (click)="resultadoPublicacion(publicacion)"></button>
+                        <p-toast></p-toast>
+                        <button pButton pRipple type="button" label="Vista rapida" icon="pi pi-search" (click)="op.toggle($event); vistaRapida(publicacion.id_publicacion)" class="p-button-rounded p-button-outlined"></button>-->
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editUsuario(usuario)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">No cuenta con usuarios registrados</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <p-dialog [(visible)]="usuarioDialogo" [style]="{width: '500px'}" header="Datos Usuario" [modal]="true" styleClass="p-fluid">
+            <ng-template pTemplate="content">
+                <img src="https://electronicssoftware.net/wp-content/uploads/user.png" class="product-image center">
+                <div class="p-field">
+                    <label for="nombre"> Nombre</label>
+                    <input type="text" pInputText id="nombre" [(ngModel)]="usuario.nombre_usuario" required autofocus />
+                    <small class="p-error" *ngIf="enviado && !usuario.nombre_usuario">Nombre requerido</small>
+                </div>
+                <div class="p-field">
+                    <label for="direccion"> Direccion</label>
+                    <input type="text" pInputText id="direccion" [(ngModel)]="usuario.direccion_usuario" required autofocus />
+                    <small class="p-error" *ngIf="enviado && !usuario.direccion_usuario">Direccion requerido</small>
+                </div>
+                <div class="p-field">
+                    <label for="rol"> Rol</label>
+                    <p-dropdown [(ngModel)]="usuario.rol" inputId="inventoryStatus" [options]="roles" placeholder="Seleccione"></p-dropdown>
+                </div>
+                <div class="p-field">
+                    <label for="email"> Correo</label>
+                    <input type="email" pInputText id="email" [(ngModel)]="usuario.email" required autofocus />
+                    <small class="p-error" *ngIf="enviado && !usuario.email">Correo requerido</small>
+                </div>
+                <div class="p-field">
+                    
+                    <label for="pass"> Contraseña</label>
+                    <input type="password" pInputText id="pass" [(ngModel)]="usuario.password" required autofocus />
+                </div>
+                
+                <div class="p-field"> 
+                    <label for="email"> Habilitado</label>
+                    <br>
+                    <p-inputSwitch [(ngModel)]="habilitado"></p-inputSwitch>
+                </div>
+                
+                <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="cerrar()"></button>
+                <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="actualizar()"></button>
+            </ng-template>
+        </p-dialog>
+
+    </body>
+</html>

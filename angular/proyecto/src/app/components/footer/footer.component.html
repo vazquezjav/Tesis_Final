@@ -1,0 +1,92 @@
+<!--<footer class="footer">
+    <div  class="footer__projects">
+        <p> &copy; Javier Vazquez</p>
+    </div>
+</footer> -->
+
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h1 class="center"> <img src="assets/logoPie.PNG" class="image"> 
+                <br>
+                 <span>Javier</span> Vazquez</h1>
+            <p style="color: white;">Desarrollador 💻</p>
+
+            <div class="contact">
+                <span style="color: white;"><i class="pi pi-phone colorFont"></i> &nbsp; 0959558892</span>
+                 <a href="mailto:vazquezjavier079@gmail.com" rel="nofollow" style="color: white; text-decoration: none"> <i class="pi pi-envelope colorFont"></i>&nbsp; vazquezjavier079@gmail.com </a>
+                 <br><br>
+
+            </div>
+            <div class="socials">
+                <a href="https://www.facebook.com/profile.php?id=100004902013812"><i class="pi pi-facebook colorFont"></i></a>
+                <a href="https://twitter.com/javazq99"><i class="pi pi-twitter colorFont"></i></a>
+                <a href="https://github.com/vazquezjav"><i class="pi pi-github colorFont"></i></a>
+                <a href="https://www.linkedin.com/in/javier-vazquez-9a3906159/"><i class="pi pi-briefcase colorFont"></i></a>
+            </div>
+        </div>
+        <div class="footer-section links">
+            <h2>Accesos Rapidos</h2>
+            <br>
+            <ul>
+                <a href="home" >
+                    <li class="colorFont">Home</li>
+                </a>
+                <a href="login()"  (click)="login()">
+                    <li class="colorFont">Login</li>
+                </a>
+                <a href="register()" (click)="register()">
+                    <li class="colorFont">Registrate</li>
+                </a>
+                <a href="team">
+                    <li class="colorFont">Equipo Trabajo</li>
+                </a>
+
+            </ul>
+        </div>
+        <div class="footer-section contact-form">
+            <h2>Contactanos</h2>
+            <!--<div class="grid-container">
+                <div class="grid-item"><img
+                        src="https://www.ups.edu.ec/ups_portal-theme/images/ups/home/logo-ups-home.png" alt="Tutor"
+                        class="image"></div>
+                <div class="grid-item">
+                    <p>PhD. Gabriel Leon</p> <br>
+
+                    <a href="https://twitter.com/Gabus_leon"><i class="pi pi-twitter colorFont"></i></a> &nbsp;
+                    <a href="https://github.com/gabusleon"><i class="pi pi-github colorFont"></i></a>
+
+                </div>
+                <div class="grid-item"><img src="../../../assets/javier.PNG" alt="Desarrolador" class="image"></div>
+                <div class="grid-item">
+                    <p>Est. Javier Vazquez</p> <br>
+                    <a href="https://www.facebook.com/profile.php?id=100004902013812"><i
+                            class="pi pi-facebook colorFont"></i></a> &nbsp;
+                    <a href="https://twitter.com/javazq99"><i class="pi pi-twitter colorFont"></i></a> &nbsp;
+                    <a href="https://github.com/vazquezjav"><i class="pi pi-github colorFont"></i></a>
+
+                </div>
+
+            </div> -->
+
+            <div class="p-grid p-fluid" >
+                <div class="card">
+                    <div class="p-inputgroup">
+                        <input type="email" pInputText  [(ngModel)]="email"  placeholder="Ecriba su correo" />        
+                    </div>
+                    <br>
+                    <div class="p-inputgroup">
+                        <input type="email" pInputText  [(ngModel)]="message" placeholder="Escriba su mensaje" /> 
+                    </div>
+                </div>
+                <br>
+                <div class="centerButtons">
+                    <button pButton type="button" class="p-button-raised p-button-rounded p-d-block p-mx-auto  btn-send" (click)='enviar()' label="Enviar" ></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; Javier Vazquez - GIHP4C - Universidad Politécnica Salesiana
+        </div>
+    </div>
+</div>

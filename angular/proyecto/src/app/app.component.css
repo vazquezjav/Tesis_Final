@@ -1,0 +1,21 @@
+.menu .ui-menuitem-item
+{
+   text-align:right !important;
+}
+.meos {
+    background-color: rgba(0,0,0,.15) !important;
+    
+}
+
+#scotchy-footer:before {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse farthest-corner at 100% 150%,rgb(228, 87, 87) 20%,transparent 60%);
+}
